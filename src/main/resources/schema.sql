@@ -52,6 +52,8 @@ create table booklists_users (
 
 create table books_authors (
   book_id   UUID not null references books(book_id),
-  author_id UUID not null references authors(author_id),
+  author_id bigint not null references authors(author_id),
   primary key (book_id, author_id)
 );
+
+alter table booklists add constraint uniqNameBooklistByUser unique (author, name);

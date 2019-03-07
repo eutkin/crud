@@ -1,8 +1,5 @@
 package io.github.eutkin.crud.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
@@ -10,8 +7,6 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "books")
-@Getter
-@Setter
 public class Book {
 
     @Id
@@ -35,4 +30,66 @@ public class Book {
     @ManyToOne
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
+
+    public Book(){
+
+    }
+
+    public Book(UUID id) {
+        this.id = id;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public Book setId(UUID id) {
+        this.id = id;
+        return this;
+    }
+
+    public LocalDate getPublishDate() {
+        return publishDate;
+    }
+
+    public Book setPublishDate(LocalDate publishDate) {
+        this.publishDate = publishDate;
+        return this;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public Book setGenre(Genre genre) {
+        this.genre = genre;
+        return this;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public Book setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+        return this;
+    }
+
+    public Set<Author> getAuthors() {
+        return authors;
+    }
+
+    public Book setAuthors(Set<Author> authors) {
+        this.authors = authors;
+        return this;
+    }
+
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public Book setPublisher(Publisher publisher) {
+        this.publisher = publisher;
+        return this;
+    }
 }

@@ -1,8 +1,5 @@
 package io.github.eutkin.crud.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,8 +7,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "genres")
-@Getter
-@Setter
 public class Genre {
 
     @Id
@@ -20,4 +15,22 @@ public class Genre {
 
     @Column(name = "genre")
     private String name;
+
+    public Long getId() {
+        return id;
+    }
+
+    public Genre setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Genre setName(String name) {
+        this.name = name;
+        return this;
+    }
 }

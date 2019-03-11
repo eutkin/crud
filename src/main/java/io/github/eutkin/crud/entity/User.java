@@ -1,7 +1,5 @@
 package io.github.eutkin.crud.entity;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,8 +15,6 @@ import static javax.persistence.FetchType.EAGER;
 
 @Entity
 @Table(name = "users")
-@Getter
-@Setter
 public class User implements UserDetails {
 
     @Id
@@ -82,5 +78,37 @@ public class User implements UserDetails {
     @Override
     public int hashCode() {
         return Objects.hash(login);
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public User setLogin(String login) {
+        this.login = login;
+        return this;
+    }
+
+    public User setPassword(String password) {
+        this.password = password;
+        return this;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public User setDisplayName(String displayName) {
+        this.displayName = displayName;
+        return this;
+    }
+
+    public Set<Booklist> getBooklists() {
+        return booklists;
+    }
+
+    public User setBooklists(Set<Booklist> booklists) {
+        this.booklists = booklists;
+        return this;
     }
 }

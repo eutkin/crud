@@ -10,10 +10,12 @@ import io.github.eutkin.crud.service.exception.BooklistNotFoundServiceException;
 import io.github.eutkin.crud.view.BooklistView;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import static java.util.Objects.requireNonNull;
 
 @Service
+@Transactional
 public class DefaultBookAdder implements BookAdder {
 
     private final BooklistRepository booklistRepository;

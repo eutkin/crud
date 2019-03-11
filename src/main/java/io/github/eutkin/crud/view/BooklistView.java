@@ -1,7 +1,5 @@
 package io.github.eutkin.crud.view;
 
-import io.github.eutkin.crud.entity.Booklist;
-
 import java.util.Set;
 
 public class BooklistView {
@@ -9,13 +7,6 @@ public class BooklistView {
     private String name;
 
     private Set<BookView> books;
-
-    public BooklistView(Booklist booklist) {
-        this.name = booklist.getName();
-    }
-
-    public BooklistView() {
-    }
 
     public String getName() {
         return name;

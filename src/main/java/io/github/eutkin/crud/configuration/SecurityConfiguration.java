@@ -3,6 +3,7 @@ package io.github.eutkin.crud.configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -12,13 +13,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import static java.util.Objects.requireNonNull;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
+@Profile("dev")
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Autowired
     private UserDetailsService userRepository;
 
     @Override
@@ -49,5 +51,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder bcrypt() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Autowired
+    public SecurityConfiguration setUserRepository(UserDetailsService userRepository) {
+        this.userRepository = requireNonNull(userRepository);
+        return this;
     }
 }

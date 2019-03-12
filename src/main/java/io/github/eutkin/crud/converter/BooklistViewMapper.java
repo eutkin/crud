@@ -4,7 +4,7 @@ import io.github.eutkin.crud.entity.Booklist;
 import io.github.eutkin.crud.view.BooklistView;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.springframework.core.convert.converter.Converter;
+import org.springframework.lang.NonNull;
 
 import static org.mapstruct.InjectionStrategy.CONSTRUCTOR;
 
@@ -13,10 +13,10 @@ import static org.mapstruct.InjectionStrategy.CONSTRUCTOR;
         injectionStrategy = CONSTRUCTOR,
         uses = BookViewMapper.class
 )
-public interface BooklistViewMapper extends Converter<Booklist, BooklistView> {
+public interface BooklistViewMapper {
 
     @Mapping(source = "name", target = "name")
     @Mapping(source = "books", target = "books")
-    @Override
-    BooklistView convert(Booklist source);
+    @NonNull
+    BooklistView convert(@NonNull Booklist source);
 }

@@ -39,8 +39,8 @@ create table booklists (
 );
 
 create table booklists_books (
-  booklist_id binary not null references booklists(booklist_id),
-  book_id     binary not null references books(book_id),
+  booklist_id UUID not null references booklists(booklist_id),
+  book_id     UUID not null references books(book_id),
   primary key (booklist_id, book_id)
 );
 

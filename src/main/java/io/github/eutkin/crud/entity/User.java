@@ -10,7 +10,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.*;
 
-import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.EAGER;
 
 @Entity
@@ -24,7 +23,7 @@ public class User implements UserDetails {
 
     private String displayName;
 
-    @ManyToMany(cascade = ALL, mappedBy = "users", fetch = EAGER)
+    @ManyToMany(mappedBy = "users", fetch = EAGER)
     private Set<Booklist> booklists = new HashSet<>();
 
     @Override

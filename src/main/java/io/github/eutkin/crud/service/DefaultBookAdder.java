@@ -1,5 +1,6 @@
 package io.github.eutkin.crud.service;
 
+import io.github.eutkin.crud.converter.BooklistViewMapper;
 import io.github.eutkin.crud.entity.Book;
 import io.github.eutkin.crud.entity.Booklist;
 import io.github.eutkin.crud.repository.BookRepository;
@@ -8,7 +9,6 @@ import io.github.eutkin.crud.request.AddBookToBooklistRequest;
 import io.github.eutkin.crud.service.exception.BookNotFoundServiceException;
 import io.github.eutkin.crud.service.exception.BooklistNotFoundServiceException;
 import io.github.eutkin.crud.view.BooklistView;
-import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,12 +20,12 @@ public class DefaultBookAdder implements BookAdder {
 
     private final BooklistRepository booklistRepository;
     private final BookRepository bookRepository;
-    private final Converter<Booklist, BooklistView> viewConverter;
+    private final BooklistViewMapper viewConverter;
 
     public DefaultBookAdder(
             BooklistRepository booklistRepository,
             BookRepository bookRepository,
-            Converter<Booklist, BooklistView> viewConverter
+            BooklistViewMapper viewConverter
     ) {
         this.booklistRepository = requireNonNull(booklistRepository);
         this.bookRepository = requireNonNull(bookRepository);

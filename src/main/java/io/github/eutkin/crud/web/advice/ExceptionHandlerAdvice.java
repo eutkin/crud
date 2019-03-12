@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import java.util.Collections;
 import java.util.Locale;
 import java.util.Map;
 
@@ -30,10 +31,10 @@ public class ExceptionHandlerAdvice implements MessageSourceAware {
 
 
     @ExceptionHandler(ServiceException.class)
-    public ResponseEntity<String> handle(ServiceException ex, Locale locale) {
+    public ResponseEntity<Map<String, String>> handle(ServiceException ex, Locale locale) {
         HttpStatus statusCode = ex instanceof UnexpectedServiceException ? INTERNAL_SERVER_ERROR : BAD_REQUEST;
         String message = messageSource.getMessage(ex.getMessageCode(), ex.getArgs(), locale);
-        return status(statusCode).body(message);
+        return status(statusCode).body(Collections.singletonMap("error", message));
     }
 
     @Override

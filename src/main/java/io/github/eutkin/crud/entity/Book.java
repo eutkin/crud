@@ -16,7 +16,7 @@ public class Book {
 
     private LocalDate publishDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "genre_id")
     private Genre genre;
 

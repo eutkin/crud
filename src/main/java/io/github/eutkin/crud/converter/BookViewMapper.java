@@ -5,10 +5,10 @@ import io.github.eutkin.crud.entity.Book;
 import io.github.eutkin.crud.view.BookView;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.springframework.core.convert.converter.Converter;
+import org.springframework.lang.NonNull;
 
 @Mapper(componentModel = "spring")
-public interface BookViewMapper extends Converter<Book, BookView> {
+public interface BookViewMapper {
 
     @Mapping(source = "id", target = "id")
     @Mapping(source = "publishDate", target = "publishDate")
@@ -16,8 +16,8 @@ public interface BookViewMapper extends Converter<Book, BookView> {
     @Mapping(source = "shortDescription", target = "shortDescription")
     @Mapping(source = "authors", target = "authors")
     @Mapping(source = "publisher.name", target = "publisher")
-    @Override
-    BookView convert(Book book);
+    @NonNull
+    BookView convert(@NonNull Book book);
 
     default String authorToString(Author author) {
         return author.getName();

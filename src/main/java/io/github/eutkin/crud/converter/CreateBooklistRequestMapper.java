@@ -7,19 +7,19 @@ import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
-import org.springframework.core.convert.converter.Converter;
+import org.springframework.lang.NonNull;
 
 import java.util.UUID;
 
 @Mapper(componentModel = "spring")
-public interface CreateBooklistRequestMapper extends Converter<CreateBooklistRequest, Booklist> {
+public interface CreateBooklistRequestMapper {
 
 
     @Mapping(source = "owner", target = "author")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "books", target = "books")
-    @Override
-    Booklist convert(CreateBooklistRequest source);
+    @NonNull
+    Booklist convert(@NonNull CreateBooklistRequest source);
 
     default Book uuidToBook(UUID book) {
         return new Book().setId(book);

@@ -4,6 +4,7 @@ import io.github.eutkin.crud.service.exception.ServiceException;
 import io.github.eutkin.crud.service.exception.UnexpectedServiceException;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -21,6 +22,7 @@ import java.util.Map;
 
 import static java.util.stream.Collectors.toMap;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.CONFLICT;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.ResponseEntity.status;
 
@@ -35,6 +37,12 @@ public class ExceptionHandlerAdvice implements MessageSourceAware {
         HttpStatus statusCode = ex instanceof UnexpectedServiceException ? INTERNAL_SERVER_ERROR : BAD_REQUEST;
         String message = messageSource.getMessage(ex.getMessageCode(), ex.getArgs(), locale);
         return status(statusCode).body(Collections.singletonMap("error", message));
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<Map<String, String>> handle(DataIntegrityViolationException ex, Locale locale) {
+        String message = messageSource.getMessage("conflict", null, locale);
+        return status(CONFLICT).body(Collections.singletonMap("error", message));
     }
 
     @Override
